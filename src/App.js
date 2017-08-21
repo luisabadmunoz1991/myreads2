@@ -14,7 +14,10 @@ class BooksApp extends React.Component {
      * users can use the browser's back and forward buttons to navigate between
      * pages, as well as provide a good URL they can bookmark and share.
      */
-    books: [] 
+    books: [],
+    wantToRead:[],
+    currentlyReading:[],
+    read:[]
 
   }
    componentDidMount(){
@@ -22,7 +25,7 @@ class BooksApp extends React.Component {
       this.setState({ books });
       this.setState({ wantToRead: books.filter((c) => c.shelf === "wantToRead" ) });
       this.setState({ currentlyReading: books.filter((c) => c.shelf === "currentlyReading" ) });
-       this.setState({ read: books.filter((c) => c.shelf === "read" ) });
+      this.setState({ read: books.filter((c) => c.shelf === "read" ) });
     })
    }
 
@@ -49,20 +52,20 @@ class BooksApp extends React.Component {
                 <div className="bookshelf">
                   <h2 className="bookshelf-title">Currently Reading</h2>
                   <div className="bookshelf-books">
-                  <ListBooks books={this.state.currentlyReading} />
+                    <ListBooks books={this.state.currentlyReading} />
                   </div>
                 </div>
                 <div className="bookshelf">
                   <h2 className="bookshelf-title">Want to Read</h2>
                   <div className="bookshelf-books">
-                  <ListBooks books={this.state.wantToRead} /></div> }
+                    <ListBooks books={this.state.wantToRead} /></div> 
                 
                   </div>
                 </div>
                 <div className="bookshelf">
                   <h2 className="bookshelf-title">Read</h2>
                   <div className="bookshelf-books">
-                  <ListBooks books={this.state.read} />
+                    <ListBooks books={this.state.read} />
                 
                   </div>
                 </div>
