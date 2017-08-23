@@ -1,4 +1,5 @@
 import React , {Component} from 'react'
+import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import escapeRegExp from 'escape-string-regexp'
 import sortBy from 'sort-by'
@@ -6,7 +7,7 @@ import sortBy from 'sort-by'
 
 
 
-class ListBooks extends Component{
+class BookSearch extends Component{
 	 static propTypes = {
     books: PropTypes.array.isRequired   
    }
@@ -37,7 +38,16 @@ class ListBooks extends Component{
 	return (
 
   <div className="search-books">
-    
+      <div className="search-books-bar">
+              <Link className="close-search" to="/">Close</Link>
+              <div className="search-books-input-wrapper">
+              
+                <input type="test" placeholder="Search by title or author" value={query} 
+                       onChange={(event) => this.updateQuery(event.target.value) }
+                />
+ 
+              </div>
+            </div>
             
             <div className="search-books-results">
             <ol className='books-grid'> 
@@ -80,4 +90,4 @@ class ListBooks extends Component{
 	   )
    } 
 }
-export default ListBooks
+export default BookSearch
