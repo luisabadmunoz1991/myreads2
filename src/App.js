@@ -3,7 +3,6 @@ import {Route, Link} from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
 import ListBooks from './Listbooks'
 import BookSearch from './bookSearch'
-import Book from './Book'
 import './App.css'
 
 class BooksApp extends React.Component {
@@ -84,10 +83,6 @@ class BooksApp extends React.Component {
            books={this.state.books}
            updateBook={this.shelf}/>
         )}/>
-
-      <Route path="/book" render={({ history }) => (
-        <Book/>
-        )}/>  
 
       </div>
     )
