@@ -1,49 +1,29 @@
 import React , {Component} from 'react'
 import PropTypes from 'prop-types'
-import escapeRegExp from 'escape-string-regexp'
-import sortBy from 'sort-by'
+import * as BooksAPI from './BooksAPI'
 
 
 
-
-class ListBooks extends Component{
-	 static propTypes = {
-    books: PropTypes.array.isRequired   
+class Book extends Component{
+state = {
+    book: []
+  }
+   static propTypes = {
+    book: PropTypes.array.isRequired   
    }
-    state = {query:''}
 
-    updateQuery =(query) => {
-        this.setState({ query:query.trim()
-        })
-    }   
-     clearQuery =() => {
-        this.setState({ query:''
-        })
-    }
 
-    	render() {
-        const{books}= this.props
-        const{query} = this.state
-        let showingBooks
-        if (query){
-          const match = new RegExp (escapeRegExp(query), 'i')
-          showingBooks = books.filter((book) => match.test(book.title) || match.test(book.authors)  )
-           } else {
-              showingBooks=books
-           }
-        showingBooks.sort(sortBy('authors'))
+   componentDidMount(){
+    BooksAPI.get().then((book) => {
+      this.setState({ book });
+    })
+   }
 
-		console.log('props', this.props)
-	return (
+   render() {
+    console.log('props', this.props)
 
-  <div className="search-books">
-    
-            
-            <div className="search-books-results">
-            <ol className='books-grid'> 
-            {showingBooks.map((book) =>  
-              (
-      <li key={book.id}>
+  return (
+
          <div className="book"> 
                     <div className="book-top">
 
@@ -71,13 +51,8 @@ class ListBooks extends Component{
 
                           </div>
          </div>
-        
-               </li>
-                 ))}        
-              </ol>
-            </div>
-          </div>
-	   )
+             )
    } 
 }
-export default ListBooks
+
+export default Book
