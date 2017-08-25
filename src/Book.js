@@ -2,7 +2,9 @@ import React , {Component} from 'react'
 
 class Book extends Component{
 
-
+  handleChange = (event) => {
+  this.props.updateBook(this.props.book, event.target.value)
+}
 
 
 
@@ -38,10 +40,9 @@ class Book extends Component{
 
                           </div>
          </div>
-           handleChange = (event) => {
-  this.props.updateBook(this.props.book, event.target.value)
-}
+
              )
+
    } 
 }
 
