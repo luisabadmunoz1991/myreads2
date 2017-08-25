@@ -10,7 +10,7 @@ class Book extends Component{
   }
 
     handleChange(event) {
-    this.setState(event.target.shelf);
+    this.setState(this.props.book.shelf = event.target.shelf);
 
   }
 
