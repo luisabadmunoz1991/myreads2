@@ -2,9 +2,8 @@ import React , {Component} from 'react'
 
 class Book extends Component{
 
-  handleChange = (event) => {
-  this.props.updateBook(this.props.book, event.target.value)
-}
+
+
 
 
 
@@ -20,7 +19,7 @@ class Book extends Component{
                          </div>
                               <div className="book-shelf-changer" onSubmit={this.handleSubmit}>
 
-                              <select value={this.props.book.shelf} onChange={this.handleChange}>
+                              <select value={this.props.book.value} onChange={this.handleChange}>
                                 <option value="none" disabled>Move to...</option>
                                 <option value="currentlyReading" >Currently Reading</option>
                                 <option value="wantToRead">Want to Read</option>
@@ -41,6 +40,7 @@ class Book extends Component{
                           </div>
          </div>
 
+      
              )
 
    } 

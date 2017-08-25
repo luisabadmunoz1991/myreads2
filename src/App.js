@@ -36,6 +36,10 @@ class BooksApp extends React.Component {
       }))
       BooksAPI.update(book, shelf)}
 
+        handleChange = (event) => {
+  this.props.updateBook(this.props.book, event.target.value)
+}
+
   render() {
     return (
    <div className="app">

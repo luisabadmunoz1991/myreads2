@@ -56,7 +56,7 @@ class BookSearch extends Component{
             {showingBooks.map((book) =>  
               (
       <li key={book.id}>
-          <Book book={book} />
+          <Book book={book} updateBook={this.props.updateBook} />
          
                </li>
                  ))}        
