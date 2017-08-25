@@ -57,7 +57,7 @@ class BooksApp extends React.Component {
                 <div className="bookshelf">
                   <h2 className="bookshelf-title">Want to Read</h2>
                   <div className="bookshelf-books">
-                    <ListBooks books={this.state.wantToRead} /></div> 
+                    <ListBooks books={this.state.wantToRead}/></div> 
                 
                   </div>
                 </div>
