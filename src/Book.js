@@ -1,18 +1,9 @@
 import React , {Component} from 'react'
 
 class Book extends Component{
-  constructor(props) {
-    super(props);
-    this.state = this.props.book.shelf;
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
 
-    handleChange(event) {
-    this.setState(this.props.book.shelf = event.target.shelf);
 
-  }
 
 
    render() {
@@ -27,7 +18,7 @@ class Book extends Component{
                          </div>
                               <div className="book-shelf-changer" onSubmit={this.handleSubmit}>
 
-                              <select value={this.state.shelf} onChange={this.handleChange}>
+                              <select value={this.props.book.shelf} onChange={this.handleChange}>
                                 <option value="none" disabled>Move to...</option>
                                 <option value="currentlyReading" >Currently Reading</option>
                                 <option value="wantToRead">Want to Read</option>
@@ -47,6 +38,9 @@ class Book extends Component{
 
                           </div>
          </div>
+           handleChange = (event) => {
+  this.props.updateBook(this.props.book, event.target.value)
+}
              )
    } 
 }
