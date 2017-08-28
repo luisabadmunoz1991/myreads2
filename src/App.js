@@ -25,7 +25,7 @@ class BooksApp extends Component {
     books: state.books.filter(b => b.id !== book.id).concat([ book ])
   }))
 
-  BooksAPI.update(book, shelf)
+  BooksAPI.updsate(book, shelf)
 }
     
 
@@ -83,6 +83,7 @@ class BooksApp extends Component {
         <BookSearch
            books={this.state.books}
            updateBook={this.updateBook}/>
+           
         )}/>
 
       </div>
