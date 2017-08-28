@@ -8,11 +8,7 @@ import './App.css'
 class BooksApp extends Component {
   //Inicializamos los estados
   state = {
-    books: [],
-    wantToRead:[],
-    currentlyReading:[],
-    read:[],
-    none:[]
+    books: []
   }
 
    componentDidMount(){
@@ -51,14 +47,14 @@ class BooksApp extends Component {
                 <div className="bookshelf">
                     <h2 className="bookshelf-title">Currently Reading</h2>
                     <div className="bookshelf-books">
-                      <ListBooks books={this.state.currentlyReading} />
-                    </div>
+                     <ListBooks books={this.state.books.filter(book => book.shelf === 'currentlyReading' )} />                 
+                   </div>
                 </div>
 
                 <div className="bookshelf">
                     <h2 className="bookshelf-title">Want to Read</h2>
                     <div className="bookshelf-books">
-                      <ListBooks books={this.state.wantToRead} />
+                    <ListBooks books={this.state.books.filter(book => book.shelf === 'wantToRead' )} />
                     </div>
                 </div>
               </div>
@@ -66,14 +62,14 @@ class BooksApp extends Component {
               <div className="bookshelf">
                   <h2 className="bookshelf-title">Read</h2>
                   <div className="bookshelf-books">
-                    <ListBooks books={this.state.read} />
+                    <ListBooks books={this.state.books.filter(book => book.shelf === 'read' )} />
+
                   </div>
              </div>
 
              <div className="bookshelf">
                  <h2 className="bookshelf-title">None</h2>
                  <div className="bookshelf-books">
-                   <ListBooks books={this.state.none} />
                  </div>
             </div>
         </div>
