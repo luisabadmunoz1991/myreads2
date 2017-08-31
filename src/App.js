@@ -67,12 +67,6 @@ class BooksApp extends Component {
                   </div>
              </div>
 
-             <div className="bookshelf">
-                 <h2 className="bookshelf-title">None</h2>
-                 <div className="bookshelf-books">
-                   <ListBooks updateBook={this.updateBook} books={this.state.books.filter( (c) => c.shelf === "none" )}/>
-                 </div>
-            </div>
         </div>
 
         <div className="open-search">
