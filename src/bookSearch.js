@@ -1,7 +1,6 @@
 import React , {Component} from 'react'
 import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types'
-import * as BooksAPI from './BooksAPI'
 import escapeRegExp from 'escape-string-regexp'
 import sortBy from 'sort-by'
 
@@ -55,8 +54,7 @@ class BookSearch extends Component{
                     	<div className="book-top">
                         <div className="book-cover" style={{width: 128, height:193, backgroundImage:`url(${book.imageLinks.thumbnail})`}}></div>
                               <div className="book-shelf-changer">
-		                              <select onChange={(event) => { BooksAPI.update(book, event.target.value);
-																															 console.log("Se cambio a ", event.target.value)} }>
+		                              <select onChange={(event) => {this.props.updateBook(book, event.target.value);}}>
 		                                <option value="nona" disabled>Move to...</option>
 																		<option></option>
 																		<option value="currentlyReading">Currently Reading</option>

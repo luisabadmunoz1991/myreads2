@@ -9,25 +9,29 @@ class BooksApp extends Component {
   //Inicializamos los estados
   state = {
     books: []
+    //wantToRead:[],
+    //currentlyReading:[],
+    //read:[],
+    //none:[]
   }
 
    componentDidMount(){
     BooksAPI.getAll().then((books) => {
       this.setState({ books });
-      
+      //this.setState({ wantToRead: books.filter( (c) => c.shelf === "wantToRead" ) });
+      //this.setState({ currentlyReading: books.filter( (c) => c.shelf === "currentlyReading" ) });
+      //this.setState({ read: books.filter( (c) => c.shelf === "read" ) });
+      //this.setState({ none: books.filter( (c) => c.shelf === "none" ) });
     })
    }
 
-    updateBook = (book, shelf) => {
-  book.shelf = shelf;
-
-  this.setState((state) => ({
-    books: state.books.filter(b => b.id !== book.id).concat([ book ])
-  }))
-
-  BooksAPI.updsate(book, shelf)
-}
-    
+     updateBook = (book, shelf) => {
+      book.shelf = shelf;
+      this.setState((state) => ({
+        books: state.books.filter(b => b.id !== book.id).concat([ book ])
+      }))
+      BooksAPI.update(book, shelf)
+    }
 
   render() {
     return (
@@ -44,14 +48,14 @@ class BooksApp extends Component {
                 <div className="bookshelf">
                     <h2 className="bookshelf-title">Currently Reading</h2>
                     <div className="bookshelf-books">
-                     <ListBooks updateBook={this.updateBook} books={this.state.books.filter(book => book.shelf === 'currentlyReading' )} />                 
-                   </div>
+                      <ListBooks updateBook={this.updateBook} books={this.state.books.filter( (c) => c.shelf === "currentlyReading")}/>
+                    </div>
                 </div>
 
                 <div className="bookshelf">
                     <h2 className="bookshelf-title">Want to Read</h2>
                     <div className="bookshelf-books">
-                    <ListBooks updateBook={this.updateBook} books={this.state.books.filter(book => book.shelf === 'wantToRead' )} />
+                      <ListBooks updateBook={this.updateBook} books={this.state.books.filter( (c) => c.shelf === "wantToRead")}/>
                     </div>
                 </div>
               </div>
@@ -59,14 +63,14 @@ class BooksApp extends Component {
               <div className="bookshelf">
                   <h2 className="bookshelf-title">Read</h2>
                   <div className="bookshelf-books">
-                    <ListBooks updateBook={this.updateBook} books={this.state.books.filter(book => book.shelf === 'read' )} />
-
+                    <ListBooks updateBook={this.updateBook} books={this.state.books.filter( (c) => c.shelf === "read" )}/>
                   </div>
              </div>
 
              <div className="bookshelf">
                  <h2 className="bookshelf-title">None</h2>
                  <div className="bookshelf-books">
+                   <ListBooks updateBook={this.updateBook} books={this.state.books.filter( (c) => c.shelf === "none" )}/>
                  </div>
             </div>
         </div>
@@ -83,7 +87,6 @@ class BooksApp extends Component {
         <BookSearch
            books={this.state.books}
            updateBook={this.updateBook}/>
-           
         )}/>
 
       </div>
