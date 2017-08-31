@@ -3,38 +3,49 @@ import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import escapeRegExp from 'escape-string-regexp'
 import sortBy from 'sort-by'
+import * as BooksAPI from './BooksAPI'
+
 
 
 class BookSearch extends Component{
 	 static propTypes = {
     	books: PropTypes.array.isRequired
    }
+	state = {query:'',
+   searchResults: [] 
+}
+  updateQuery = (query) => {
+  // set query in state
+  this.setState({ query: query.trim() });
 
-	state = {query:''}
+  // call search api
+  BooksAPI.search(query, 20).then(response => {
+    console.log(response);
 
-  updateQuery =(query) => {
-        this.setState({ query:query.trim()})
-    }
+    // discard bad response values
+    if (!response || response.error) return;
 
+    // otherwise, put search results in state
+    this.setState({ searchResults: response });
+  })
+}
   clearQuery =() => {
         this.setState({ query:''})
     }
 
-    	render() {
-        const{books}= this.props
-        const{query} = this.state
-        let showingBooks
 
-				if (query){
+
+    	render() {
+        const{query} = this.state
+        let showingBooks = this.state.searchResults;
+ 				if (query){
           const match = new RegExp (escapeRegExp(query), 'i')
-          showingBooks = books.filter((book) => match.test(book.title) || match.test(book.authors) )
-        } else {
-          showingBooks=books
+          
         }
 
         showingBooks.sort(sortBy('authors'))
-    		//console.log('props', this.props)
 
+        
 			return (
   			<div className="search-books">
       			<div className="search-books-bar">
@@ -56,7 +67,7 @@ class BookSearch extends Component{
                               <div className="book-shelf-changer">
 		                              <select onChange={(event) => {this.props.updateBook(book, event.target.value);}}>
 		                                <option value="nona" disabled>Move to...</option>
-																		<option></option>
+                                    <option> </option> 
 																		<option value="currentlyReading">Currently Reading</option>
 		                                <option value="wantToRead">Want to Read</option>
 		                                <option value="read">Read</option>

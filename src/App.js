@@ -6,22 +6,14 @@ import BookSearch from './bookSearch'
 import './App.css'
 
 class BooksApp extends Component {
-  //Inicializamos los estados
   state = {
     books: []
-    //wantToRead:[],
-    //currentlyReading:[],
-    //read:[],
-    //none:[]
   }
 
    componentDidMount(){
     BooksAPI.getAll().then((books) => {
       this.setState({ books });
-      //this.setState({ wantToRead: books.filter( (c) => c.shelf === "wantToRead" ) });
-      //this.setState({ currentlyReading: books.filter( (c) => c.shelf === "currentlyReading" ) });
-      //this.setState({ read: books.filter( (c) => c.shelf === "read" ) });
-      //this.setState({ none: books.filter( (c) => c.shelf === "none" ) });
+     
     })
    }
 
@@ -71,6 +63,7 @@ class BooksApp extends Component {
 
         <div className="open-search">
           <Link to="/search">Add a book</Link>
+          
         </div>
 
     </div>
