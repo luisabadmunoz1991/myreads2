@@ -16,28 +16,13 @@ class BookSearch extends Component{
    }
  
   updateQuery = (query) => {
-   if (query == "") { this.setState({ searchResults: []}); return; }
-
-  BooksAPI.search(query, 20).then(response => {
-    console.log(response);
-    console.log("STEP 2")
-    console.log("QUERY : " + query)
-    console.log("RESPONSE: " + response)
-    console.log("SEARCH RESULT: " + this.state.searchResults)
-
-    if (!response || response.error) return;
-    console.log("STEP 3")
-    console.log("QUERY : " + query)
-    console.log("RESPONSE: " + response)
-    console.log("SEARCH RESULT: " + this.state.searchResults)
-    
-    this.setState({ searchResults: response });
-    console.log("STEP 4")
-    console.log("QUERY : " + query)
-    console.log("RESPONSE: " + response)
-    console.log("SEARCH RESULT: " + this.state.searchResults)
-  })
-}
+   if (query === "") { this.setState({ searchResults: []}); return; }
+       BooksAPI.search(query, 20).then(response => {
+       console.log(response);
+   if (!response || response.error) { this.setState({ searchResults: []}); return; }  
+      this.setState({ searchResults: response });
+     })
+    }
   clearQuery =() => {
         this.setState({ query:''})
     }
@@ -62,7 +47,6 @@ class BookSearch extends Component{
             </div>
 
             <div className="search-books-results">
-
 							<ol className='books-grid'>
             		{showingBooks.map((book) => (
 									<li key={book.id}>
@@ -80,14 +64,12 @@ class BookSearch extends Component{
 		                              </select>
                                </div>
                     	</div>
-
                     <div className="book-title">{book.title}</div>
                     <div className="book-authors">{book.authors}</div>
                   </div>
                 </li>
               ))}
               </ol>
-
             </div>
           </div>
 	   )

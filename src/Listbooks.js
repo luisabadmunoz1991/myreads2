@@ -35,7 +35,6 @@ class ListBooks extends Component{
 
 		return (
 			<div className="search-books">
-
 					<div className="search-books-results">
             	<ol className='books-grid'>
             	{showingBooks.map((book) => (
@@ -62,7 +61,6 @@ class ListBooks extends Component{
                 ))}
               </ol>
          </div>
-
           </div>
 	      )
       }
