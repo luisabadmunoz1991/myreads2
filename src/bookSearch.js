@@ -13,43 +13,43 @@ class BookSearch extends Component{
    }
 	state = {query:'',
    searchResults: [] 
-}
-state = {
-  //query:'',
-   searchResults: [] 
-}
+   }
+ 
   updateQuery = (query) => {
-  // set query in state
-  //this.setState({ query: query.trim() });
+   if (query == "") { this.setState({ searchResults: []}); return; }
 
-  // call search api
   BooksAPI.search(query, 20).then(response => {
     console.log(response);
+    console.log("STEP 2")
+    console.log("QUERY : " + query)
+    console.log("RESPONSE: " + response)
+    console.log("SEARCH RESULT: " + this.state.searchResults)
 
-    // discard bad response values
     if (!response || response.error) return;
-
-    // otherwise, put search results in state
+    console.log("STEP 3")
+    console.log("QUERY : " + query)
+    console.log("RESPONSE: " + response)
+    console.log("SEARCH RESULT: " + this.state.searchResults)
+    
     this.setState({ searchResults: response });
+    console.log("STEP 4")
+    console.log("QUERY : " + query)
+    console.log("RESPONSE: " + response)
+    console.log("SEARCH RESULT: " + this.state.searchResults)
   })
 }
   clearQuery =() => {
         this.setState({ query:''})
     }
-
-
-
     	render() {
         const{query} = this.state
         let showingBooks = this.state.searchResults;
  				if (query){
           const match = new RegExp (escapeRegExp(query), 'i')          
         }
-      
-       
+
         showingBooks.sort(sortBy('authors'))
 
-        
 			return (
   			<div className="search-books">
       			<div className="search-books-bar">
@@ -68,7 +68,7 @@ state = {
 									<li key={book.id}>
 				 						<div className="book">
                     	<div className="book-top">
-                        <div className="book-cover" style={{width: 128, height:193, backgroundImage:`url(${book.imageLinks.thumbnail})`}}></div>
+                        <div className="book-cover" style={{width: 128, height:193, backgroundImage:`url(${(book.imageLinks || {}).thumbnail})`}}></div>
                               <div className="book-shelf-changer">
 		                              <select onChange={(event) => {this.props.updateBook(book, event.target.value);}}>
 		                                <option value="nona" disabled>Move to...</option>
