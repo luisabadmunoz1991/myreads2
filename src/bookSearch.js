@@ -14,9 +14,13 @@ class BookSearch extends Component{
 	state = {query:'',
    searchResults: [] 
 }
+state = {
+  //query:'',
+   searchResults: [] 
+}
   updateQuery = (query) => {
   // set query in state
-  this.setState({ query: query.trim() });
+  //this.setState({ query: query.trim() });
 
   // call search api
   BooksAPI.search(query, 20).then(response => {
@@ -39,10 +43,10 @@ class BookSearch extends Component{
         const{query} = this.state
         let showingBooks = this.state.searchResults;
  				if (query){
-          const match = new RegExp (escapeRegExp(query), 'i')
-          
+          const match = new RegExp (escapeRegExp(query), 'i')          
         }
-
+      
+       
         showingBooks.sort(sortBy('authors'))
 
         
@@ -51,8 +55,9 @@ class BookSearch extends Component{
       			<div className="search-books-bar">
               	<Link className="close-search" to="/">Close</Link>
               	<div className="search-books-input-wrapper">
-                		<input type="test" placeholder="Search by title or author" value={query}
-                       onChange={(event) => this.updateQuery(event.target.value) } />
+                		<input type="test" placeholder="Search by title or author"
+                    ref={userInput => this.userInput = userInput}
+                    onChange={(event) => this.updateQuery(this.userInput.value) } />
               	</div>
             </div>
 
