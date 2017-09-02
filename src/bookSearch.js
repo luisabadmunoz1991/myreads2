@@ -56,7 +56,7 @@ class BookSearch extends Component{
                               <div className="book-shelf-changer">
 		                              <select onChange={(event) => {this.props.updateBook(book, event.target.value);}}>
 		                                <option value="none" disabled>Move to...</option>
-                                    <option value="none">{book.shelf} </option>
+                                    <option value="none" style={{color:`#64bc45`}}> current shelf: {book.shelf} </option>
 																		<option value="currentlyReading">Currently Reading</option>
 		                                <option value="wantToRead">Want to Read</option>
 		                                <option value="read">Read</option>
