@@ -25,14 +25,16 @@ class ListBooks extends Component{
 			if (query){
           	const match = new RegExp (escapeRegExp(query), 'i')
           	showingBooks = books.filter((book) => match.test(book.title) || match.test(book.authors)  )
-      } 
-
-      else {
+      } else {
             showingBooks=books
       }
+
 			showingBooks.sort(sortBy('authors'))
+			//console.log('props', this.props)
+
 		return (
 			<div className="search-books">
+
 					<div className="search-books-results">
             	<ol className='books-grid'>
             	{showingBooks.map((book) => (
@@ -43,8 +45,8 @@ class ListBooks extends Component{
                           </div>
                               <div className="book-shelf-changer">
 		                              <select onChange={(event) => {this.props.updateBook(book, event.target.value);}}>
-		                                <option value="none" disabled>Move to...</option>
-                                    <option value="none" style={{color:`#64bc45`}}> current shelf: {book.shelf} </option>
+		                                <option value="nona" disabled>Move to...</option>
+																		<option style={{color: `#0f0`}}>state: {book.shelf}</option>
 																		<option value="currentlyReading">Currently Reading</option>
 		                                <option value="wantToRead">Want to Read</option>
 		                                <option value="read">Read</option>
@@ -59,6 +61,7 @@ class ListBooks extends Component{
                 ))}
               </ol>
          </div>
+
           </div>
 	      )
       }

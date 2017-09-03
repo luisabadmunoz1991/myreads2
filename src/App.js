@@ -6,6 +6,7 @@ import BookSearch from './bookSearch'
 import './App.css'
 
 class BooksApp extends Component {
+  //Inicializamos los estados
   state = {
     books: []
   }
@@ -13,7 +14,6 @@ class BooksApp extends Component {
    componentDidMount(){
     BooksAPI.getAll().then((books) => {
       this.setState({ books });
-     
     })
    }
 
@@ -35,8 +35,8 @@ class BooksApp extends Component {
                 <h1>MyReads</h1>
             </div>
 
-            <div className="list-books-content">
-              <div>
+        <div className="list-books-content">
+
                 <div className="bookshelf">
                     <h2 className="bookshelf-title">Currently Reading</h2>
                     <div className="bookshelf-books">
@@ -50,29 +50,27 @@ class BooksApp extends Component {
                       <ListBooks updateBook={this.updateBook} books={this.state.books.filter( (c) => c.shelf === "wantToRead")}/>
                     </div>
                 </div>
-              </div>
+
 
               <div className="bookshelf">
                   <h2 className="bookshelf-title">Read</h2>
                   <div className="bookshelf-books">
-                    <ListBooks updateBook={this.updateBook} books={this.state.books.filter( (c) => c.shelf === "read" )}/>
+                    <ListBooks updateBook={this.updateBook} books={this.state.books.filter( (c) => c.shelf === "read")}/>
                   </div>
              </div>
 
-        </div>
+           </div>
 
         <div className="open-search">
           <Link to="/search">Add a book</Link>
-          
         </div>
-
     </div>
 
     )}/>
 
       <Route path="/search" render={({ history }) => (
         <BookSearch
-           books={this.state.books}
+           /*books={this.state.books}*/
            updateBook={this.updateBook}/>
         )}/>
 
